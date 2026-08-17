@@ -1,4 +1,5 @@
-name: Primer Pipeline CI/CD - Laboratorio 1
+# Pipeline CI/CD - Laboratorio 2
+name: Pipeline CI/CD - Laboratorio 2
 
 on:
   push:
