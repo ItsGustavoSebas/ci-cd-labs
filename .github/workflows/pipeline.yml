@@ -1,10 +1,8 @@
-name: Pipeline CI/CD - Laboratorio 2
+name: Primer Pipeline CI/CD - Laboratorio 1
 
 on:
   push:
-    branches: [ "main", "feature/**" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -32,11 +30,6 @@ jobs:
         run: |
           echo "Versión de Git en el runner:"
           git --version
-
-      - name: Simular prueba fallida de CI
-        run: |
-          echo "Error: La prueba de integración falló intencionalmente para validar la detección de errores en CI."
-          exit 1
 
       - name: Finalizar ejecución del pipeline
         run: |
