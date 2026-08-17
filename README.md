@@ -9,12 +9,9 @@ ci-cd-labs/
 ├── README.md
 ├── app/
 │   └── hello.txt
-├── .github/
-│   └── workflows/
-│       └── pipeline.yml
-└── docs/
-    ├── analisis_laboratorio1.md
-    └── Respuestas_Laboratorio1.pdf
+└── .github/
+    └── workflows/
+        └── pipeline.yml
 ```
 
 ## Laboratorio 1: Primer Pipeline de Integración Continua
@@ -25,5 +22,9 @@ ci-cd-labs/
 - Implementar un pipeline utilizando *Pipeline as Code* (`.github/workflows/pipeline.yml`).
 - Analizar los resultados de ejecución y registros generados por cada commit.
 
+### Verificación del Pipeline
+El pipeline está configurado en `.github/workflows/pipeline.yml` y se ejecuta automáticamente en cada `push` realizado hacia la rama `main`.
+
 ---
-*Desarrollado para la materia de Integración y Despliegue Continuo.*
+*Desarrollado para el módulo de Integración y Despliegue Continuo.*
+
