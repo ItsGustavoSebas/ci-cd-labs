@@ -33,6 +33,11 @@ jobs:
           echo "Versión de Git en el runner:"
           git --version
 
+      - name: Simular prueba fallida de CI
+        run: |
+          echo "Error: La prueba de integración falló intencionalmente para validar la detección de errores en CI."
+          exit 1
+
       - name: Finalizar ejecución del pipeline
         run: |
           echo "El pipeline ha finalizado correctamente sin errores."
