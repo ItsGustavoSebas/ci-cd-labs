@@ -1,7 +1,9 @@
-name: Primer Pipeline CI/CD - Laboratorio 1
+name: Pipeline CI/CD - Laboratorio 2
 
 on:
   push:
+    branches: [ "main", "feature/**" ]
+  pull_request:
     branches: [ "main" ]
   workflow_dispatch:
 
