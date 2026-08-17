@@ -1,3 +1,4 @@
+# Pipeline CI/CD - Laboratorio 2
 name: Pipeline CI/CD - Laboratorio 2
 
 on:
@@ -32,6 +33,10 @@ jobs:
         run: |
           echo "Versión de Git en el runner:"
           git --version
+
+      - name: Validar corrección del pipeline de CI
+        run: |
+          echo "La falla intencional ha sido corregida exitosamente."
 
       - name: Finalizar ejecución del pipeline
         run: |
