@@ -1,5 +1,4 @@
-# Pipeline CI/CD - Laboratorio 2
-name: Pipeline CI/CD - Laboratorio 2
+name: Pipeline CI/CD - Laboratorio 3
 
 on:
   push:
@@ -10,34 +9,39 @@ on:
 
 jobs:
   build-and-test:
-    name: Ejecución del Pipeline de CI
+    name: Compilación, Pruebas Unitarias y Cobertura
     runs-on: ubuntu-latest
 
     steps:
-      - name: Descargar repositorio (Checkout)
+      - name: Descargar código fuente (Checkout)
         uses: actions/checkout@v4
 
-      - name: Mostrar mensaje de bienvenida
-        run: |
-          echo "=================================================="
-          echo " ¡Bienvenido al Pipeline de Integración Continua! "
-          echo " Laboratorio 1 - CI/CD Labs                      "
-          echo "=================================================="
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
 
-      - name: Mostrar fecha y hora de ejecución
-        run: |
-          echo "Fecha y Hora de ejecución (UTC): $(date -u)"
-          echo "Timestamp ISO 8601: $(date --iso-8601=seconds)"
+      - name: Etapa 1 - Compilación del Proyecto
+        run: mvn -B compile
 
-      - name: Mostrar versión de Git instalada
-        run: |
-          echo "Versión de Git en el runner:"
-          git --version
+      - name: Etapa 2 - Ejecución de Pruebas Unitarias
+        run: mvn -B test
 
-      - name: Validar corrección del pipeline de CI
-        run: |
-          echo "La falla intencional ha sido corregida exitosamente."
+      - name: Etapa 3 - Generación de Cobertura con JaCoCo
+        run: mvn -B jacoco:report
 
-      - name: Finalizar ejecución del pipeline
-        run: |
-          echo "El pipeline ha finalizado correctamente sin errores."
+      - name: Etapa 4 - Publicar Artefacto de Reportes de Pruebas (Surefire)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-test-reports
+          path: target/surefire-reports/
+
+      - name: Etapa 5 - Publicar Artefacto de Cobertura de Código (JaCoCo HTML)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-coverage-report
+          path: target/site/jacoco/
